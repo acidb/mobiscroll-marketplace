@@ -1,0 +1,31 @@
+{
+  "name": "mobiscroll",
+  "owner": {
+    "name": "Mobiscroll",
+    "email": "support@mobiscroll.com"
+  },
+  "plugins": [
+    {
+      "name": "mobiscroll",
+      "source": "./plugins/mobiscroll",
+      "description": "Mobiscroll UI development skill with MCP server",
+      "version": "1.0.0",
+      "category": "development",
+      "keywords": [
+        "mobiscroll",
+        "calendar",
+        "eventcalendar",
+        "scheduler",
+        "timeline",
+        "agenda",
+        "datepicker",
+        "ui",
+        "select",
+        "popup",
+        "forms",
+        "alerts",
+        "notifications"
+      ]
+    }
+  ]
+}

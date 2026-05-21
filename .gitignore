@@ -1,0 +1,31 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code local state (memory, session data, local settings)
+.claude/
+
+# Node (if dependencies are added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs (if a build step is added later)
+dist/
+build/
+.next/
+out/
+
+# Env files
+.env
+.env.local
+.env.*.local
