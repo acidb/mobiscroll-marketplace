@@ -18,7 +18,32 @@ UI component library for scheduling, calendars, date/time pickers, selects, and 
 It ships separate packages per framework. The API surface is large and framework-specific —
 do not guess props, events, or methods from memory.
 
-## Step 0 — Mandatory: Detect the Environment
+## Step 0 — Check Installation First
+
+Before anything else, check whether Mobiscroll is already installed:
+
+- Look for any `@mobiscroll/*` key in `package.json` (dependencies or devDependencies).
+- If found → **Mobiscroll is installed. Skip this section entirely and proceed to Step 1.**
+
+**Only if Mobiscroll is NOT installed**, guide the user through the CLI setup:
+
+```bash
+npm install -g @mobiscroll/cli
+mobiscroll config <framework>   # vue | react | angular | javascript | jquery
+```
+
+This command:
+- Generates `.npmrc` with the auth token for the Mobiscroll npm registry
+- Installs the correct `@mobiscroll/<framework>` package automatically
+
+**Never manually configure `.npmrc`** — the CLI handles it. Manual `.npmrc` editing is a
+last resort only for CI/CD environments where the CLI cannot run.
+
+After the user runs `mobiscroll config`, continue to Step 1.
+
+---
+
+## Step 1 — Mandatory: Detect the Environment
 
 Before writing ANY Mobiscroll code, determine the framework and version:
 
@@ -36,7 +61,7 @@ Before writing ANY Mobiscroll code, determine the framework and version:
 
 **Lock the framework for the rest of the session.** Never mix framework patterns.
 
-## Step 1 — Mandatory: Look Up Before You Write
+## Step 2 — Mandatory: Look Up Before You Write
 
 **NEVER write Mobiscroll code from memory.** The API is large, version-specific, and
 framework-specific. Props that exist in React may not exist in Angular. Events have
@@ -56,7 +81,7 @@ different signatures across frameworks. Always:
 This is not optional. Skipping the lookup produces hallucinated APIs that look plausible
 but don't compile. The MCP server has the authoritative schema — use it.
 
-## Step 2 — Load Framework Conventions
+## Step 3 — Load Framework Conventions
 
 Invoke the skill matching the detected framework:
 
