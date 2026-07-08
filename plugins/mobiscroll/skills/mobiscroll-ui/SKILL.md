@@ -47,7 +47,7 @@ After the user runs `mobiscroll config`, continue to Step 1.
 
 Before writing ANY Mobiscroll code, determine the framework and version:
 
-1. Run `mcp__mobiscroll__resolveEnvironment` on the project working directory.
+1. Run the `resolveEnvironment` MCP tool on the project working directory.
 2. This returns the framework (`react`, `angular`, `vue`, `js`, `jquery`) and Mobiscroll
    major version (`5` or `6`).
    Note: the tool returns `js` for vanilla JavaScript — use the `mobiscroll-ui-javascript` skill.
@@ -65,21 +65,31 @@ Before writing ANY Mobiscroll code, determine the framework and version:
 
 **NEVER write Mobiscroll code from memory.** The API is large, version-specific, and
 framework-specific. Props that exist in React may not exist in Angular. Events have
-different signatures across frameworks. Always:
+different signatures across frameworks. Use the Mobiscroll **MCP server** tools — call
+each by name:
 
-1. **Look up the component schema** — call `mcp__mobiscroll__getComponentSchema` with the
+1. **Look up the component schema** — call `getComponentSchema` with the
    component name, detected framework, and major version before writing any code.
    - For Eventcalendar, use the variant suffix: `eventcalendar.base`, `eventcalendar.agenda`,
      `eventcalendar.scheduler`, `eventcalendar.timeline`, `eventcalendar.calenderview`.
    - For other components: `datepicker`, `select`, `popup`.
-2. **Search for examples** — call `mcp__mobiscroll__searchExamples` when the user asks for a
-   specific use case (e.g., "resource calendar", "date range picker", "event CRUD").
-3. **Validate your output** — after writing Mobiscroll code, call `mcp__mobiscroll__validateCode`
+   - Not sure a component name is correct? Call `listComponents` (framework +
+     major version) to get the authoritative list before guessing.
+2. **Search for examples** — call `searchExamples` when the user asks for a
+   specific use case (e.g., "resource calendar", "date range picker", "event CRUD"). Results
+   are summaries only — call `getExampleById` with the returned `exampleId`
+   (plus framework and major version) to fetch the full runnable source before using or
+   adapting it.
+3. **Validate your output** — after writing Mobiscroll code, call `validateCode`
    using the same component ID you passed to `getComponentSchema`
    (e.g. `eventcalendar.scheduler`, not just `eventcalendar`).
 
 This is not optional. Skipping the lookup produces hallucinated APIs that look plausible
-but don't compile. The MCP server has the authoritative schema — use it.
+but don't compile. The MCP server has the authoritative schema — use it. If the MCP tools
+are unavailable (not connected, unreachable, or network-blocked), fall back to the
+`llms-*.txt` docs for the detected framework (see Documentation Sources below); only if
+those are also unavailable, rely on general knowledge — and say so explicitly, flagging
+that the API should be verified. Never silently guess props, events, or methods.
 
 ## Step 3 — Load Framework Conventions
 
@@ -135,13 +145,12 @@ timezone handling), consult the online documentation:
   - Angular: `https://mobiscroll.com/docs/llms-angular-full.txt`
   - Vue: `https://mobiscroll.com/docs/llms-vue-full.txt`
   - jQuery: `https://mobiscroll.com/docs/llms-jquery-full.txt`
-- **Full docs per framework (v5 — use when `mcp__mobiscroll__resolveEnvironment` returns `major: 5`):**
+- **Full docs per framework (v5 — use when `resolveEnvironment` returns `major: 5`):**
   - JS: `https://mobiscroll.com/docs/5.35.0/llms-javascript-full.txt`
   - React: `https://mobiscroll.com/docs/5.35.0/llms-react-full.txt`
   - Angular: `https://mobiscroll.com/docs/5.35.0/llms-angular-full.txt`
   - Vue: `https://mobiscroll.com/docs/5.35.0/llms-vue-full.txt`
   - jQuery: `https://mobiscroll.com/docs/5.35.0/llms-jquery-full.txt`
-- **Connect (server-side calendar sync):** `https://mobiscroll.com/docs/llms-connect-full.txt`
 - **Icons:** `https://mobiscroll.com/docs/llms-icons.txt` (only when icon lookup needed)
 
 Fetch only the file matching the detected framework. Never load multiple framework docs.
@@ -152,7 +161,8 @@ Mobiscroll Connect is a **separate server-side product** for syncing with Google
 Outlook, and Apple Calendar via REST APIs and OAuth. It is NOT a UI component.
 
 - If the user asks about server-side sync, OAuth, webhooks, REST endpoints → this is
-  Connect. Fetch `llms-connect-full.txt`. Do NOT mix Connect APIs with UI component code.
+  Connect. Invoke the `mobiscroll-connect` skill. Do NOT mix Connect APIs with UI
+  component code.
 - If the user asks about displaying calendar events in the UI → this is the Eventcalendar
   component. Use the framework docs.
 - If the user mentions Google/Outlook/Apple Calendar, check context: client-side display

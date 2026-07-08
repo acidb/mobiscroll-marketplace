@@ -51,6 +51,9 @@ Component factory functions are lowercase: `mobiscroll.eventcalendar()`,
 | Vue `<script setup>` or `ref()` | Plain JS variables and event handlers |
 | jQuery `$('#el').mobiscroll()` plugin pattern | `mobiscroll.eventcalendar('#el', { ... })` |
 | `@mobiscroll/react`, `@mobiscroll/angular`, etc. | `@mobiscroll/javascript` only |
+| Re-calling `mobiscroll.eventcalendar('#el', {...})` to update data | Keep the instance; call `inst.setOptions({ data: newEvents })` |
+| Discarding the element without `inst.destroy()` (memory leak, detached handlers) | Call `inst.destroy()` on teardown |
+| Initializing before the target element exists in the DOM | Initialize after the element is present (e.g. after DOM ready / render) |
 
 ## Event Handling
 
@@ -85,4 +88,6 @@ mobiscroll.eventcalendar('#el', {
 > deprecated — use `renderSchedulerEvent` instead. The same rename applies to all
 > `*Content` variants.
 
-Always verify available render options via `mcp__mobiscroll__getComponentSchema`.
+Always verify available render options via the `getComponentSchema` MCP tool before writing
+code. If the MCP tools are unavailable, fall back to the JavaScript docs (see
+`mobiscroll-ui` → Documentation Sources), then to general knowledge — and say so.

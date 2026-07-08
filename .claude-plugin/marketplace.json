@@ -8,8 +8,8 @@
     {
       "name": "mobiscroll",
       "source": "./plugins/mobiscroll",
-      "description": "Mobiscroll UI development skill with MCP server",
-      "version": "1.0.0",
+      "description": "Mobiscroll UI development skills with MCP server, plus Mobiscroll Connect for server-side OAuth calendar sync",
+      "version": "2.0.0",
       "category": "development",
       "keywords": [
         "mobiscroll",
@@ -24,7 +24,11 @@
         "popup",
         "forms",
         "alerts",
-        "notifications"
+        "notifications",
+        "connect",
+        "oauth",
+        "calendar-sync",
+        "webhooks"
       ]
     }
   ]

@@ -120,4 +120,6 @@ onEventClick(args: any) {
 > deprecated — use `schedulerEventTemplate` instead. The same rename applies to all
 > `*Content` variants.
 
-Always verify available template inputs via `mcp__mobiscroll__getComponentSchema`.
+Always verify available template inputs via the `getComponentSchema` MCP tool before writing
+code. If the MCP tools are unavailable, fall back to the Angular docs (see `mobiscroll-ui`
+→ Documentation Sources), then to general knowledge — and say so.

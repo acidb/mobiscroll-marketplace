@@ -2,17 +2,23 @@
 
 Claude Code plugin that provides Mobiscroll UI development assistance through a skill
 (conventions, patterns, anti-patterns) and an MCP server (live API schema lookup,
-code validation, example search).
+code validation, example search), plus a separate skill and MCP tools for Mobiscroll
+Connect (server-side OAuth calendar sync).
 
 ## What's Included
 
 - **Skills: `mobiscroll-ui` + framework sub-skills** — `mobiscroll-ui` is the orchestrator:
   it detects the framework and delegates to the matching sub-skill (`mobiscroll-ui-react`,
   `mobiscroll-ui-angular`, `mobiscroll-ui-vue`, `mobiscroll-ui-javascript`, `mobiscroll-ui-jquery`).
-  Theming questions are handled by `mobiscroll-ui-theming`. All seven skills are installed
-  together when you install the plugin.
+  Theming questions are handled by `mobiscroll-ui-theming`.
+- **Skill: `mobiscroll-connect`** — a standalone skill for Mobiscroll Connect, the
+  separate server-side OAuth calendar sync product. It triggers independently of the
+  UI orchestrator (Connect work often happens in backend-only projects) and covers
+  REST endpoints and SDKs for Node, Python, PHP, .NET, Java, Go, and Ruby.
+  All eight skills are installed together when you install the plugin.
 - **MCP Server: `mobiscroll`** — Live API tools for schema lookup, code validation,
-  example search, and environment detection.
+  example search, and environment detection, plus a matching set of Connect tools
+  (endpoint/SDK schema lookup, REST-to-SDK mapping, error taxonomy).
 
 ## Installation
 
@@ -49,6 +55,12 @@ When you ask Claude Code to write Mobiscroll code, the skill:
 4. **Validates output** — runs `validateCode` on generated snippets to catch errors
    before they reach you.
 
+For Mobiscroll Connect work, the `mobiscroll-connect` skill triggers independently
+(no framework detection needed) and follows the same look-up-before-you-write
+approach using its own MCP tools: `resolveConnectEnvironment`, `listConnectEndpoints`
+/ `getConnectEndpointSchema`, `listConnectSdkMethods` / `getConnectSdkMethod`,
+`mapConnectEndpointToSdk`, `searchConnect`, and `getConnectErrorTaxonomy`.
+
 ## Plugin Structure
 
 ```
@@ -58,19 +70,21 @@ mobiscroll/
 ├── .mcp.json                    # MCP server configuration
 ├── skills/
 │   ├── mobiscroll-ui/
-│   │   └── SKILL.md             # Core orchestrator — detects framework, delegates
+│   │   └── SKILL.md             # Orchestrator — auto-triggers, detects framework, delegates
 │   ├── mobiscroll-ui-react/
-│   │   └── SKILL.md
+│   │   └── SKILL.md             # Sub-skill — invoked by mobiscroll-ui only, no auto-trigger
 │   ├── mobiscroll-ui-angular/
-│   │   └── SKILL.md
+│   │   └── SKILL.md             # Sub-skill — invoked by mobiscroll-ui only, no auto-trigger
 │   ├── mobiscroll-ui-vue/
-│   │   └── SKILL.md
+│   │   └── SKILL.md             # Sub-skill — invoked by mobiscroll-ui only, no auto-trigger
 │   ├── mobiscroll-ui-javascript/
-│   │   └── SKILL.md
+│   │   └── SKILL.md             # Sub-skill — invoked by mobiscroll-ui only, no auto-trigger
 │   ├── mobiscroll-ui-jquery/
-│   │   └── SKILL.md
-│   └── mobiscroll-ui-theming/
-│       └── SKILL.md
+│   │   └── SKILL.md             # Sub-skill — invoked by mobiscroll-ui only, no auto-trigger
+│   ├── mobiscroll-ui-theming/
+│   │   └── SKILL.md             # Framework-agnostic sub-skill — invoked by mobiscroll-ui only, no auto-trigger
+│   └── mobiscroll-connect/
+│       └── SKILL.md             # Standalone — auto-triggers independently of mobiscroll-ui
 └── README.md
 ```
 
@@ -92,3 +106,18 @@ mobiscroll/
 - **Popup** — Modal/overlay container
 - **Forms** — Input, textarea, button, and form elements
 - **Notifications** — Toast, snackbar, alert
+
+## Mobiscroll Connect
+
+A separate, server-side product for OAuth calendar sync — no UI, backend only.
+
+| Supported Providers        | Supported SDK Languages |
+|:----------------------------|:-------------------------|
+| Google Calendar              | Node.js                  |
+| Microsoft 365 / Outlook.com  | Python                   |
+| Apple Calendar                | PHP                       |
+| CalDAV-compatible services   | .NET, Java, Go, Ruby     |
+
+REST API is also available directly for any language/environment not covered by an
+SDK. See the `mobiscroll-connect` skill for setup, OAuth flow, and endpoint/SDK
+lookup via the MCP server's Connect tools.
