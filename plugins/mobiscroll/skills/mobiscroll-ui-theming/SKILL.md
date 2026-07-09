@@ -13,6 +13,14 @@ description: |
 
 The theming system is framework-agnostic — the same themes and CSS variables work everywhere.
 
+> **Theming and the MCP tools:** theming *options* are modeled — `theme`, `themeVariant`,
+> `cssClass`, `colors`, `inputStyle`, `labelStyle` are component options in the
+> `getComponentSchema` MCP tool, and theme demos are searchable via the `searchExamples`
+> MCP tool; verify those there. What the MCP does **not** model is the set of **CSS
+> custom-property and Sass variable names** (e.g. `$mbsc-ios-accent`) — names shown in this
+> skill are illustrative; verify the exact names against the docs below and do **not**
+> invent them.
+
 ## Global Theme Application (Recommended)
 
 Set the theme once at app startup using `setOptions()`. This applies to **all** Mobiscroll
