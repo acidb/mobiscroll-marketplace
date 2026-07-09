@@ -81,11 +81,16 @@ This table is for initial setup only — verify exact method signatures via the
 
 ## Core Concepts
 
-- **OAuth flow**: `GET /oauth/authorize` (params `client_id`, `user_id`, `scope`,
-  `redirect_uri`) → provider picker UI (Google/Microsoft/Apple/CalDAV) → provider
-  login & consent → redirect back with an authorization code → backend
-  `POST /oauth/token` (HTTP Basic `base64(clientId:clientSecret)` + a `CLIENT_ID`
-  header, form-urlencoded body) → `access_token` + `refresh_token`. Refresh with
+- **API base URL**: all REST paths below are relative to `https://connect.mobiscroll.com/api`
+  (e.g. `GET /events` → `https://connect.mobiscroll.com/api/events`). Confirm the current
+  base via `getConnectEndpointSchema` (it returns `apiBaseUrl`/`fullPath`) before hardcoding.
+- **OAuth flow**: `GET /oauth/authorize` (required `response_type=code`, `client_id`,
+  `user_id`, `redirect_uri`; optional `scope`, `state`, `providers`, `lng`) → provider
+  picker UI (Google/Microsoft/Apple/CalDAV) → provider login & consent → redirect back
+  with an authorization code → backend `POST /oauth/token` (HTTP Basic
+  `base64(clientId:clientSecret)` + a `CLIENT_ID` header, form-urlencoded body) →
+  `access_token` + `refresh_token`. Always pass `state` (an opaque value echoed back to
+  your redirect URI) and verify it on the callback to guard against CSRF. Refresh with
   `POST /oauth/token` (`grant_type=refresh_token`); revoke with `POST /oauth/disconnect`.
 - **Multiple accounts per user**: a user can connect more than one provider account.
   `GET /oauth/connection-status` lists the connected accounts grouped by provider;
@@ -101,14 +106,16 @@ This table is for initial setup only — verify exact method signatures via the
   recurrence into instances, and pagination via `pageSize`/`nextPageToken`. Querying
   `GET /events` across providers (especially with the `free-busy` scope) is how you
   check availability and prevent double-booking.
-- **Webhooks** (not modeled by the MCP tools — consult the llms-connect docs for the
-  exact schema): configure a **Webhook URL** in your Connect application settings, then
-  subscribe/unsubscribe calendars via `POST /subscribe-webhook` and
-  `POST /unsubscribe-webhook`. The payload reports the change type and the affected
-  provider/calendar/event.
+- **Webhooks** (not modeled by the MCP tools — you **must** consult the llms-connect docs
+  for the exact endpoint paths, request bodies, and payload schema; do not assume them):
+  configure a **Webhook URL** in your Connect application settings, then subscribe/
+  unsubscribe calendars for change notifications. The payload reports the change type and
+  the affected provider/calendar/event.
 - **Hosted Connect pages**: the provider-picker, login, and consent screens are hosted
-  by Connect and are customizable (Branding) and localizable — configured in the
-  dashboard, not in your code. See the llms-connect docs.
+  by Connect. Branding is configured in the dashboard, but two aspects are controlled
+  per request via `/oauth/authorize` query params: `lng` sets the page language and
+  `providers` (comma-separated `google,microsoft,apple,caldav`) filters which providers
+  are offered. See the llms-connect docs.
 - **Data normalization**: events from every provider come back in one unified
   `CalendarEvent` shape, sorted chronologically, with timezones normalized.
 
