@@ -89,6 +89,6 @@ function onEventClick(args) {
 > deprecated — use `schedulerEvent` instead. The same rename applies to all `*Content`
 > variants.
 
-Always verify available slots via the `getComponentSchema` MCP tool before writing code. If
+Always verify available slots via the `getComponentSchema` MCP tool (request only the entities you need by `names` after reviewing the index) before writing code. If
 the MCP tools are unavailable, fall back to the Vue docs (see `mobiscroll-ui` →
 Documentation Sources), then to general knowledge — and say so.

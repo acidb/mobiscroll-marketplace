@@ -9,7 +9,7 @@
       "name": "mobiscroll",
       "source": "./plugins/mobiscroll",
       "description": "Mobiscroll UI development skills with MCP server, plus Mobiscroll Connect for server-side OAuth calendar sync",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "category": "development",
       "keywords": [
         "mobiscroll",

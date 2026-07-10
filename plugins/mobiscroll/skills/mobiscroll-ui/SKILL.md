@@ -68,8 +68,15 @@ framework-specific. Props that exist in React may not exist in Angular. Events h
 different signatures across frameworks. Use the Mobiscroll **MCP server** tools — call
 each by name:
 
-1. **Look up the component schema** — call `getComponentSchema` with the
-   component name, detected framework, and major version before writing any code.
+1. **Look up the component schema (two steps)** — before writing any code:
+   1. Call `getComponentSchema` with the component name, detected framework, and major
+      version and **no `names`**. This returns a compact index of every entity
+      (`name`, `kind`, `tsType`, and a one-line `summary`) — cheap to read.
+   2. Review the index, then call `getComponentSchema` **again with `names: [...]`**
+      (the entities you will actually use) to get their full details — complete
+      description, default value, related entities. Optionally pass `kind`
+      (`option` | `event` | `method` | `renderer`) to narrow. Do NOT try to pull the
+      whole schema at full detail; it is large and wastes tokens.
    - For Eventcalendar, use the variant suffix: `eventcalendar.base`, `eventcalendar.agenda`,
      `eventcalendar.scheduler`, `eventcalendar.timeline`, `eventcalendar.calenderview`.
    - For other components: `datepicker`, `select`, `popup`.

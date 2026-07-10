@@ -81,6 +81,6 @@ $('#el').mobiscroll().eventcalendar({
 > deprecated — use `renderSchedulerEvent` instead. The same rename applies to all
 > `*Content` variants.
 
-Always verify available render options via the `getComponentSchema` MCP tool before writing
+Always verify available render options via the `getComponentSchema` MCP tool (request only the entities you need by `names` after reviewing the index) before writing
 code. If the MCP tools are unavailable, fall back to the jQuery docs (see `mobiscroll-ui`
 → Documentation Sources), then to general knowledge — and say so.

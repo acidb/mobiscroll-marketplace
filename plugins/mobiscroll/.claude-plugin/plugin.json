@@ -1,7 +1,7 @@
 {
   "name": "mobiscroll",
   "description": "Mobiscroll UI development skill with MCP server integration. Provides conventions, patterns, and API lookup for Eventcalendar, Datepicker, Select, Popup, Forms, and Notifications across all frameworks (React, Angular, Vue, JavaScript, jQuery), plus Mobiscroll Connect for server-side OAuth calendar sync with Google, Microsoft 365/Outlook.com, Apple Calendar, and CalDAV.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Mobiscroll",
     "email": "support@mobiscroll.com"
