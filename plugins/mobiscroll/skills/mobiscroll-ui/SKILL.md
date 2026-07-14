@@ -45,19 +45,23 @@ After the user runs `mobiscroll config`, continue to Step 1.
 
 ## Step 1 — Mandatory: Detect the Environment
 
-Before writing ANY Mobiscroll code, determine the framework and version:
+Before writing ANY Mobiscroll code, determine the framework and version by calling the
+`resolveEnvironment` MCP tool. The server is remote and CANNOT read your files, so you must
+send it the content it needs:
 
-1. Run the `resolveEnvironment` MCP tool on the project working directory.
-2. This returns the framework (`react`, `angular`, `vue`, `js`, `jquery`) and Mobiscroll
-   major version (`5` or `6`).
-   Note: the tool returns `js` for vanilla JavaScript — use the `mobiscroll-ui-javascript` skill.
-3. If the tool is unavailable or returns nothing, check `package.json` for:
-   - `@mobiscroll/react` → React
-   - `@mobiscroll/angular` → Angular
-   - `@mobiscroll/vue` → Vue
-   - `@mobiscroll/javascript` → vanilla JavaScript
-   - `@mobiscroll/jquery` → jQuery
-4. If you still can't determine the framework, ask the user.
+1. Read the nearest `package.json` — the repository root, or the nearest one above the file
+   you are editing (in a monorepo, the one that declares an `@mobiscroll/*` dependency) — and
+   call `resolveEnvironment` with its full raw text as `packageJsonContent`. Do NOT rely on a
+   `workingDirectory`; over HTTP it is ignored.
+2. It returns the framework (`react`, `angular`, `vue`, `js`, `jquery`) and the Mobiscroll
+   major version (`5` or `6`). The tool returns `js` for vanilla JavaScript — use the
+   `mobiscroll-ui-javascript` skill.
+3. If it returns a `PACKAGE_JSON_REQUIRED` error, you did not send `packageJsonContent` — read
+   the file and call again with its content. Never pass only `framework` to skip this.
+4. Only if, after searching the workspace, there is genuinely NO `package.json` (e.g. Mobiscroll
+   is loaded from a CDN), call again with BOTH `framework` and `noPackageJsonReason`
+   (`cdn` or `no-package-json-found-after-search`).
+5. If you still can't determine the framework, ask the user.
 
 **Lock the framework for the rest of the session.** Never mix framework patterns.
 
