@@ -1,0 +1,24 @@
+{
+  "name": "mobiscroll",
+  "version": "1.1.1",
+  "description": "Mobiscroll UI development skill with MCP server integration. Provides conventions, patterns, and API lookup for Eventcalendar, Datepicker, Select, Popup, Forms, and Notifications across all frameworks (React, Angular, Vue, JavaScript, jQuery), plus Mobiscroll Connect for server-side OAuth calendar sync with Google, Microsoft 365/Outlook.com, Apple Calendar, and CalDAV.",
+  "author": {
+    "name": "Mobiscroll",
+    "email": "support@mobiscroll.com",
+    "url": "https://mobiscroll.com"
+  },
+  "homepage": "https://mobiscroll.com/docs/vue/guides/ai-integration",
+  "repository": "https://github.com/acidb/mobiscroll-marketplace",
+  "license": "MIT",
+  "keywords": ["mobiscroll", "calendar", "eventcalendar", "scheduler", "timeline", "agenda", "datepicker", "ui", "select", "popup", "forms", "alerts", "notifications", "connect", "oauth", "calendar-sync", "webhooks"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Mobiscroll",
+    "shortDescription": "Accurate Mobiscroll UI + Connect code, with live schema lookups",
+    "longDescription": "Mobiscroll UI development skills (Eventcalendar, Datepicker, Select, Popup, Forms, Notifications) across React, Angular, Vue, JavaScript, and jQuery, plus Mobiscroll Connect for server-side OAuth calendar sync. Ships with an MCP server for live API schema lookups, code validation, and documentation search so Codex never invents an API.",
+    "developerName": "Mobiscroll",
+    "category": "development",
+    "capabilities": ["Interactive"]
+  }
+}

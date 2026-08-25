@@ -1,0 +1,17 @@
+{
+  "name": "mobiscroll",
+  "interface": {
+    "displayName": "Mobiscroll"
+  },
+  "plugins": [
+    {
+      "name": "mobiscroll",
+      "source": { "source": "local", "path": "./plugins/mobiscroll" },
+      "category": "development",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_FIRST_USE"
+      }
+    }
+  ]
+}

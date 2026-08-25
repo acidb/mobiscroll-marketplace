@@ -1,6 +1,6 @@
-# Mobiscroll Marketplace for Claude Code
+# Mobiscroll Marketplace for Claude Code & Codex
 
-A Claude Code plugin marketplace that provides AI coding assistance for [Mobiscroll](https://mobiscroll.com) — a UI component library for calendars, schedulers, date/time pickers, selects, and forms — and for Mobiscroll Connect, its server-side calendar sync product.
+A plugin marketplace that provides AI coding assistance for [Mobiscroll](https://mobiscroll.com) — a UI component library for calendars, schedulers, date/time pickers, selects, and forms — and for Mobiscroll Connect, its server-side calendar sync product. Supports both Claude Code and OpenAI Codex.
 
 ## Plugins
 
@@ -14,7 +14,9 @@ The `mobiscroll` plugin includes:
 
 ## Installation
 
-> **Note:** The exact command syntax may vary depending on your Claude Code version. Check the [Claude Code docs](https://docs.anthropic.com/claude-code) for the latest plugin commands if the steps below don't work.
+Same commands work in both Claude Code and Codex.
+
+> **Note:** Exact command syntax may vary by version. Check the [Claude Code docs](https://docs.anthropic.com/claude-code) or the [Codex docs](https://learn.chatgpt.com/docs/plugins) for the latest plugin commands if the steps below don't work.
 
 **Step 1 — Register this marketplace (one-time):**
 

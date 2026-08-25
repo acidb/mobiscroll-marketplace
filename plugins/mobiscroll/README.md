@@ -1,6 +1,6 @@
-# Mobiscroll Plugin for Claude Code
+# Mobiscroll Plugin for Claude Code & Codex
 
-Claude Code plugin that provides Mobiscroll UI development assistance through a skill
+Claude Code and Codex plugin that provides Mobiscroll UI development assistance through a skill
 (conventions, patterns, anti-patterns) and an MCP server (live API schema lookup,
 code validation, example search), plus a separate skill and MCP tools for Mobiscroll
 Connect (server-side OAuth calendar sync).
@@ -22,7 +22,9 @@ Connect (server-side OAuth calendar sync).
 
 ## Installation
 
-> **Note:** The exact command syntax may vary depending on your Claude Code version. Check the [Claude Code docs](https://docs.anthropic.com/claude-code) for the latest plugin commands if the steps below don't work.
+Same commands work in both Claude Code and Codex.
+
+> **Note:** Exact command syntax may vary by version. Check the [Claude Code docs](https://docs.anthropic.com/claude-code) or the [Codex docs](https://learn.chatgpt.com/docs/plugins) for the latest plugin commands if the steps below don't work.
 
 **Step 1 — Register the marketplace (one-time):**
 
@@ -44,7 +46,7 @@ Or install directly from a local clone during development:
 
 ## How It Works
 
-When you ask Claude Code to write Mobiscroll code, the skill:
+When you ask Claude Code or Codex to write Mobiscroll code, the skill:
 
 1. **Detects your framework** — runs `resolveEnvironment` to find whether you're using
    React, Angular, Vue, vanilla JS, or jQuery, and which Mobiscroll version.
@@ -66,9 +68,11 @@ approach using its own MCP tools: `resolveConnectEnvironment`, `listConnectEndpo
 ```
 mobiscroll/
 ├── .claude-plugin/
-│   └── plugin.json              # Plugin manifest
-├── .mcp.json                    # MCP server configuration
-├── skills/
+│   └── plugin.json              # Claude Code plugin manifest
+├── .codex-plugin/
+│   └── plugin.json              # Codex plugin manifest
+├── .mcp.json                    # MCP server configuration (shared by both plugin manifests)
+├── skills/                      # shared by both plugin manifests
 │   ├── mobiscroll-ui/
 │   │   └── SKILL.md             # Orchestrator — auto-triggers, detects framework, delegates
 │   ├── mobiscroll-ui-react/
