@@ -14,9 +14,11 @@ The `mobiscroll` plugin includes:
 
 ## Installation
 
-Same commands work in both Claude Code and Codex.
+Registration and install commands differ slightly between the two tools — pick the section that matches your setup.
 
 > **Note:** Exact command syntax may vary by version. Check the [Claude Code docs](https://docs.anthropic.com/claude-code) or the [Codex docs](https://learn.chatgpt.com/docs/plugins) for the latest plugin commands if the steps below don't work.
+
+### Claude Code
 
 **Step 1 — Register this marketplace (one-time):**
 
@@ -28,6 +30,20 @@ Same commands work in both Claude Code and Codex.
 
 ```bash
 /plugin install mobiscroll@mobiscroll
+```
+
+### Codex
+
+**Step 1 — Register this marketplace (one-time):**
+
+```bash
+/plugins marketplace add acidb/mobiscroll-marketplace
+```
+
+**Step 2 — Install the plugin:**
+
+```bash
+/plugins install mobiscroll@mobiscroll
 ```
 
 ## Plugin Documentation
