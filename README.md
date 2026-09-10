@@ -1,12 +1,12 @@
 # Mobiscroll Marketplace for Claude Code & Codex
 
-A plugin marketplace that provides AI coding assistance for [Mobiscroll](https://mobiscroll.com) — a UI component library for calendars, schedulers, date/time pickers, selects, and forms — and for Mobiscroll Connect, its server-side calendar sync product. Supports both Claude Code and OpenAI Codex.
+A plugin marketplace that gives AI coding agents accurate, current knowledge of [Mobiscroll](https://mobiscroll.com) — the scheduler, event calendar, resource timeline and agenda views, plus the calendar, date, time and range picker components — and of Mobiscroll Connect, the calendar connectivity layer for scheduling products. Supports Claude Code and OpenAI Codex.
 
 ## Plugins
 
 | Plugin | Description |
 |:-------|:------------|
-| [`mobiscroll`](plugins/mobiscroll/README.md) | Skills + MCP server for writing Mobiscroll UI code across all frameworks, plus Mobiscroll Connect (server-side OAuth calendar sync) |
+| [`mobiscroll`](plugins/mobiscroll/README.md) | Skills + MCP server for writing Mobiscroll UI code across all supported frameworks, plus Mobiscroll Connect — the calendar connectivity layer (OAuth, REST, SDKs, webhooks) |
 
 The `mobiscroll` plugin includes:
 - **Eight skills** — conventions, patterns, and anti-patterns for React, Angular, Vue, JavaScript, jQuery, and theming, plus a standalone skill for Mobiscroll Connect
