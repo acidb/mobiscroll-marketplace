@@ -4,11 +4,12 @@ A plugin marketplace that gives AI coding agents accurate, current knowledge of 
 
 ## Plugins
 
-| Plugin | Description |
-|:-------|:------------|
+| Plugin                                       | Description                                                                                                                                                                 |
+| :------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`mobiscroll`](plugins/mobiscroll/README.md) | Skills + MCP server for writing Mobiscroll UI code across all supported frameworks, plus Mobiscroll Connect — the calendar connectivity layer (OAuth, REST, SDKs, webhooks) |
 
 The `mobiscroll` plugin includes:
+
 - **Eight skills** — conventions, patterns, and anti-patterns for React, Angular, Vue, JavaScript, jQuery, and theming, plus a standalone skill for Mobiscroll Connect
 - **MCP server** — live API schema lookup, code validation, and example search against the Mobiscroll docs, plus a matching set of tools for Mobiscroll Connect's REST endpoints and SDKs
 
@@ -45,6 +46,19 @@ Registration and install commands differ slightly between the two tools — pick
 ```bash
 /plugins install mobiscroll@mobiscroll
 ```
+
+## MCP server
+
+Alongside the skills, Mobiscroll runs a hosted MCP server at `https://mcp.mobiscroll.com/` -
+version-stamped API knowledge over the Model Context Protocol. HTTP transport, no
+authentication, nothing to install.
+
+```bash
+claude mcp add --transport http mobiscroll https://mcp.mobiscroll.com/
+```
+
+Full setup for Claude Code, Codex, Cursor and GitHub Copilot:
+https://mobiscroll.com/docs/guides/ai-integration
 
 ## Plugin Documentation
 
