@@ -1,5 +1,8 @@
 # Mobiscroll Marketplace for Claude Code & Codex
 
+[![smithery badge](https://smithery.ai/badge/mobiscroll/mobiscroll-mcp)](https://smithery.ai/servers/mobiscroll/mobiscroll-mcp)
+[![Mobiscroll MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/com.mobiscroll/mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.mobiscroll/mcp)
+
 A plugin marketplace that gives AI coding agents accurate, current knowledge of [Mobiscroll](https://mobiscroll.com) — the scheduler, event calendar, resource timeline and agenda views, plus the calendar, date, time and range picker components — and of Mobiscroll Connect, the calendar connectivity layer for scheduling products. Supports Claude Code and OpenAI Codex.
 
 ## Plugins
