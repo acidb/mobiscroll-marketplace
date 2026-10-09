@@ -50,7 +50,7 @@ Registration and install commands differ slightly between the two tools — pick
 ## MCP server
 
 Alongside the skills, Mobiscroll runs a hosted MCP server at `https://mcp.mobiscroll.com/` -
-version-stamped API knowledge over the Model Context Protocol. HTTP transport, no
+version-stamped API knowledge over the Model Context Protocol. Streamable HTTP transport, no
 authentication, nothing to install.
 
 ```bash
