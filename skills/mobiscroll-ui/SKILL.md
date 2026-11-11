@@ -25,21 +25,32 @@ Before anything else, check whether Mobiscroll is already installed:
 - Look for any `@mobiscroll/*` key in `package.json` (dependencies or devDependencies).
 - If found → **Mobiscroll is installed. Skip this section entirely and proceed to Step 1.**
 
-**Only if Mobiscroll is NOT installed**, guide the user through the CLI setup:
+**Only if Mobiscroll is NOT installed**, set it up with the Mobiscroll CLI. Mobiscroll packages
+come from a private registry: `npm install @mobiscroll/...` fails with 403 until the CLI has set up
+the project. Do exactly this:
 
-```bash
-npm install -g @mobiscroll/cli
-mobiscroll config <framework>   # vue | react | angular | javascript | jquery
-```
+1. In the project root, run:
 
-This command:
-- Generates `.npmrc` with the auth token for the Mobiscroll npm registry
-- Installs the correct `@mobiscroll/<framework>` package automatically
+   ```bash
+   npm install -g @mobiscroll/cli
+   mobiscroll config <framework> --yes --no-wait   # vue | react | angular | javascript | jquery
+   ```
 
-**Never manually configure `.npmrc`** — the CLI handles it. Manual `.npmrc` editing is a
-last resort only for CI/CD environments where the CLI cannot run.
+2. The command prints a sign-in link and a code, then stops. Show both to the user and ask them
+   to approve the sign-in in their browser. **Never approve it yourself, never open or fill in the
+   page, and never ask for the user's password.**
+3. After the user says they approved (within 10 minutes), run the same `mobiscroll config` command
+   again. It picks up the sign-in, saves the token in `.npmrc` and installs the correct
+   `@mobiscroll/<framework>` package.
+4. Without a license, the CLI installs the trial. If it prints "No active licence ... installing
+   the trial", tell the user the project uses the trial.
 
-After the user runs `mobiscroll config`, continue to Step 1.
+**Never run `npm login`, never write the token into `.npmrc` yourself, and never run
+`npm install @mobiscroll/...` directly** — the CLI handles all of it. In CI/CD there is no browser
+and no terminal, so the CLI can't sign in there: the token is stored in a CI secret
+(https://mobiscroll.com/docs/<framework>/guides/npm-auth-token).
+
+After the setup succeeds, continue to Step 1.
 
 ---
 
