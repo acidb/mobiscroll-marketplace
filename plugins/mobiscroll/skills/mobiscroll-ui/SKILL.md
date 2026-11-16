@@ -40,7 +40,7 @@ the project. Do exactly this:
    to approve the sign-in in their browser. **Never approve it yourself, never open or fill in the
    page, and never ask for the user's password.**
 3. After the user says they approved (within 10 minutes), run the same `mobiscroll config` command
-   again. It picks up the sign-in, saves the token in `.npmrc` and installs the correct
+   again. It picks up the sign-in, saves the token in the project's `.npmrc` and installs the correct
    `@mobiscroll/<framework>` package.
 4. Without a license, the CLI installs the trial. If it prints "No active licence ... installing
    the trial", tell the user the project uses the trial.
@@ -49,6 +49,12 @@ the project. Do exactly this:
 `npm install @mobiscroll/...` directly** — the CLI handles all of it. In CI/CD there is no browser
 and no terminal, so the CLI can't sign in there: the token is stored in a CI secret
 (https://mobiscroll.com/docs/<framework>/guides/npm-auth-token).
+
+The CLI saves the token in the project's `.npmrc` (with Yarn 2+ also in `.yarnrc.yml`). Tell the
+user once: if this file is committed, installs work for everyone out of the box, but anyone who can
+read the repository can use the token. Other setups, such as the user-level `~/.npmrc` or an
+environment variable: https://mobiscroll.com/docs/<framework>/guides/npm-auth-token. If the CLI
+prints a note or warning about the token, show it to the user.
 
 After the setup succeeds, continue to Step 1.
 
