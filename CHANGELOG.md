@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `mobiscroll-ui` skill, Step 0: Mobiscroll CLI 1.17.0 signs in through the browser, so the agent runs `mobiscroll config <framework> --yes --no-wait`, shows the printed sign-in link and code to the user, and runs the same command again after the user approves. It never approves the sign-in itself, never asks for a password, never runs `npm login` or writes the token into `.npmrc`. Without a license the CLI installs the trial. CI/CD uses a token stored in a CI secret. Release together with CLI 1.17.0.
+- `mobiscroll-ui` skill, Step 0: Mobiscroll CLI 2.0.0 signs in through the browser, so the agent runs `mobiscroll config <framework> --yes --no-wait`, shows the printed sign-in link and code to the user, and runs the same command again after the user approves. It never approves the sign-in itself, never asks for a password, never runs `npm login` or writes the token into `.npmrc`. Without a license the CLI installs the trial. CI/CD uses a token stored in a CI secret. Release together with CLI 1.17.0.
 
 ## [1.1.1] - 2026-09-17
 
