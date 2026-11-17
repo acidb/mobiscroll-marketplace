@@ -18,16 +18,19 @@ UI component library for scheduling, calendars, date/time pickers, selects, and 
 It ships separate packages per framework. The API surface is large and framework-specific —
 do not guess props, events, or methods from memory.
 
-## Step 0 — Check Installation First
+## Step 0 — Check Mobiscroll UI Installation First
 
-Before anything else, check whether Mobiscroll is already installed:
+Before anything else, check whether Mobiscroll UI is already installed:
 
-- Look for any `@mobiscroll/*` key in `package.json` (dependencies or devDependencies).
-- If found → **Mobiscroll is installed. Skip this section entirely and proceed to Step 1.**
+- Look in `package.json` (dependencies or devDependencies) for a Mobiscroll UI package:
+  `@mobiscroll/react`, `@mobiscroll/angular`, `@mobiscroll/vue`, `@mobiscroll/javascript` or
+  `@mobiscroll/jquery` (also their `-lite`, `-trial` or npm-alias forms). `@mobiscroll/connect-sdk`
+  (Mobiscroll Connect) and `@mobiscroll/cli` don't count.
+- If found → **Mobiscroll UI is installed. Skip this section entirely and proceed to Step 1.**
 
-**Only if Mobiscroll is NOT installed**, set it up with the Mobiscroll CLI. Mobiscroll packages
-come from a private registry: `npm install @mobiscroll/...` fails with 403 until the CLI has set up
-the project. Do exactly this:
+**Only if Mobiscroll UI is NOT installed**, set it up with the Mobiscroll CLI. Mobiscroll UI packages
+come from a private registry: `npm install @mobiscroll/<framework>` fails with 403 until the CLI has
+set up the project. Do exactly this:
 
 1. In the project root, run:
 
@@ -42,11 +45,14 @@ the project. Do exactly this:
 3. After the user says they approved (within 10 minutes), run the same `mobiscroll config` command
    again. It picks up the sign-in, saves the token in the project's `.npmrc` and installs the correct
    `@mobiscroll/<framework>` package.
-4. Without a license, the CLI installs the trial. If it prints "No active licence ... installing
-   the trial", tell the user the project uses the trial.
+4. Without a license, or when the license doesn't cover this framework, the CLI installs the trial.
+   If it prints "No active licence ... installing the trial", tell the user the project uses the
+   trial. After the install, if the CLI prints a warning about the trial (not started yet, or ended),
+   show it to the user with its link.
 
-**Never run `npm login`, never write the token into `.npmrc` yourself, and never run
-`npm install @mobiscroll/...` directly** — the CLI handles all of it. In CI/CD there is no browser
+**Never run `npm login`, never write the token into `.npmrc` yourself, and never run `npm install`
+for a Mobiscroll UI package directly** — the CLI handles all of it. (The Mobiscroll Connect SDK,
+`@mobiscroll/connect-sdk`, is on the public npm registry and installs normally; it doesn't use the CLI.) In CI/CD there is no browser
 and no terminal, so the CLI can't sign in there: the token is stored in a CI secret
 (https://mobiscroll.com/docs/<framework>/guides/npm-auth-token).
 

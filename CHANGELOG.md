@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `mobiscroll-ui` skill, Step 0: Mobiscroll CLI 2.0.0 signs in through the browser, so the agent runs `mobiscroll config <framework> --yes --no-wait`, shows the printed sign-in link and code to the user, and runs the same command again after the user approves. It never approves the sign-in itself, never asks for a password, never runs `npm login` or writes the token into `.npmrc`. Without a license the CLI installs the trial. It tells the user once that a committed `.npmrc` lets everyone install but shares the token, and links the other setups. CI/CD uses a token stored in a CI secret. Release together with CLI 2.0.0.
+- `mobiscroll-ui` skill, Step 0: Mobiscroll CLI 2.0.0 signs in through the browser, so the agent runs `mobiscroll config <framework> --yes --no-wait`, shows the printed sign-in link and code to the user, and runs the same command again after the user approves. It never approves the sign-in itself, never asks for a password, never runs `npm login` or writes the token into `.npmrc`. Without a license, or when the license doesn't cover the framework, the CLI installs the trial; the agent passes on the CLI's trial warnings (not started, ended) with their links. Step 0 now checks only Mobiscroll UI packages (`@mobiscroll/connect-sdk` and `@mobiscroll/cli` don't count) and says the Connect SDK installs normally. It tells the user once that a committed `.npmrc` lets everyone install but shares the token, and links the other setups. CI/CD uses a token stored in a CI secret. Release together with CLI 2.0.0.
+- `mobiscroll-connect` skill: the Connect SDKs install from their public registries, without the Mobiscroll CLI or a Mobiscroll npm token.
 
 ## [1.1.1] - 2026-09-17
 

@@ -66,6 +66,9 @@ verified. Never silently guess endpoints or SDK methods.
 
 ## SDK Setup by Language
 
+The Connect SDKs install from their public package registries. Don't use the Mobiscroll CLI,
+`mobiscroll config` or a Mobiscroll npm token for them.
+
 | Language | Install | Import | Client |
 |:---------|:--------|:-------|:-------|
 | Node.js | `npm install @mobiscroll/connect-sdk` | `import { MobiscrollConnectClient } from "@mobiscroll/connect-sdk"` | `new MobiscrollConnectClient({ clientId, clientSecret, redirectUri })` |
