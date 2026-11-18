@@ -52,9 +52,14 @@ set up the project. Do exactly this:
 
 **Never run `npm login`, never write the token into `.npmrc` yourself, and never run `npm install`
 for a Mobiscroll UI package directly** — the CLI handles all of it. (The Mobiscroll Connect SDK,
-`@mobiscroll/connect-sdk`, is on the public npm registry and installs normally; it doesn't use the CLI.) In CI/CD there is no browser
-and no terminal, so the CLI can't sign in there: the token is stored in a CI secret
-(https://mobiscroll.com/docs/<framework>/guides/npm-auth-token).
+`@mobiscroll/connect-sdk`, is on the public npm registry and installs normally; it doesn't use the CLI.)
+
+**CI/CD pipelines** don't run the CLI: nobody is there to approve a sign-in. The user signs in once,
+stores their token as a CI secret, and the pipeline's `.npmrc` reads it from there:
+https://mobiscroll.com/docs/<framework>/guides/npm-auth-token. If asked to set up CI, point the user
+to that page; never copy the token into a file, a secret or the chat yourself. This is only about
+pipelines: in a sandbox without a browser, still use the steps above, because the user approves on
+their own device.
 
 The CLI saves the token in the project's `.npmrc` (with Yarn 2+ also in `.yarnrc.yml`). Tell the
 user once: if this file is committed, installs work for everyone out of the box, but anyone who can
