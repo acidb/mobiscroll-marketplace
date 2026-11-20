@@ -18,28 +18,56 @@ UI component library for scheduling, calendars, date/time pickers, selects, and 
 It ships separate packages per framework. The API surface is large and framework-specific —
 do not guess props, events, or methods from memory.
 
-## Step 0 — Check Installation First
+## Step 0 — Check Mobiscroll UI Installation First
 
-Before anything else, check whether Mobiscroll is already installed:
+Before anything else, check whether Mobiscroll UI is already installed:
 
-- Look for any `@mobiscroll/*` key in `package.json` (dependencies or devDependencies).
-- If found → **Mobiscroll is installed. Skip this section entirely and proceed to Step 1.**
+- Look in `package.json` (dependencies or devDependencies) for a Mobiscroll UI package:
+  `@mobiscroll/react`, `@mobiscroll/angular`, `@mobiscroll/vue`, `@mobiscroll/javascript` or
+  `@mobiscroll/jquery` (also their `-lite`, `-trial` or npm-alias forms). `@mobiscroll/connect-sdk`
+  (Mobiscroll Connect) and `@mobiscroll/cli` don't count.
+- If found → **Mobiscroll UI is installed. Skip this section entirely and proceed to Step 1.**
 
-**Only if Mobiscroll is NOT installed**, guide the user through the CLI setup:
+**Only if Mobiscroll UI is NOT installed**, set it up with the Mobiscroll CLI. Mobiscroll UI packages
+come from a private registry: `npm install @mobiscroll/<framework>` fails with 403 until the CLI has
+set up the project. Do exactly this:
 
-```bash
-npm install -g @mobiscroll/cli
-mobiscroll config <framework>   # vue | react | angular | javascript | jquery
-```
+1. In the project root, run:
 
-This command:
-- Generates `.npmrc` with the auth token for the Mobiscroll npm registry
-- Installs the correct `@mobiscroll/<framework>` package automatically
+   ```bash
+   npm install -g @mobiscroll/cli
+   mobiscroll config <framework> --yes --no-wait   # vue | react | angular | javascript | jquery
+   ```
 
-**Never manually configure `.npmrc`** — the CLI handles it. Manual `.npmrc` editing is a
-last resort only for CI/CD environments where the CLI cannot run.
+2. The command prints a sign-in link and a code, then stops. Show both to the user and ask them
+   to approve the sign-in in their browser. **Never approve it yourself, never open or fill in the
+   page, and never ask for the user's password.**
+3. After the user says they approved (within 10 minutes), run the same `mobiscroll config` command
+   again. It picks up the sign-in, saves the token in the project's `.npmrc` and installs the correct
+   `@mobiscroll/<framework>` package.
+4. Without a license, or when the license doesn't cover this framework, the CLI installs the trial.
+   If it prints "No active licence ... installing the trial", tell the user the project uses the
+   trial. After the install, if the CLI prints a warning about the trial (not started yet, or ended),
+   show it to the user with its link.
 
-After the user runs `mobiscroll config`, continue to Step 1.
+**Never run `npm login`, never write the token into `.npmrc` yourself, and never run `npm install`
+for a Mobiscroll UI package directly** — the CLI handles all of it. (The Mobiscroll Connect SDK,
+`@mobiscroll/connect-sdk`, is on the public npm registry and installs normally; it doesn't use the CLI.)
+
+**CI/CD pipelines** don't run the CLI: nobody is there to approve a sign-in. The user signs in once,
+stores their token as a CI secret, and the pipeline's `.npmrc` reads it from there:
+https://mobiscroll.com/docs/<framework>/guides/npm-auth-token. If asked to set up CI, point the user
+to that page; never copy the token into a file, a secret or the chat yourself. This is only about
+pipelines: in a sandbox without a browser, still use the steps above, because the user approves on
+their own device.
+
+The CLI saves the token in the project's `.npmrc` (with Yarn 2+ also in `.yarnrc.yml`). Tell the
+user once: if this file is committed, installs work for everyone out of the box, but anyone who can
+read the repository can use the token. Other setups, such as the user-level `~/.npmrc` or an
+environment variable: https://mobiscroll.com/docs/<framework>/guides/npm-auth-token. If the CLI
+prints a note or warning about the token, show it to the user.
+
+After the setup succeeds, continue to Step 1.
 
 ---
 
