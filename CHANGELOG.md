@@ -5,7 +5,7 @@ All notable changes to the Mobiscroll plugin marketplace will be documented in t
 The format is based on [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.2] - Unreleased
+## [1.1.2] - 2026-11-20
 
 ### Changed
 
